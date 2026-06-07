@@ -13,6 +13,11 @@
     "dev": "pnpm --filter @workout-xp/web dev",
     "build": "pnpm --filter @workout-xp/web build",
     "check": "pnpm --filter @workout-xp/web check",
-    "import:program": "python scripts/import-program.py"
+    "import:program": "python scripts/import-program.py",
+    "docker:build": "docker build -t workout-xp:local .",
+    "docker:run": "docker run --rm -p 3000:3000 --name workout-xp-local workout-xp:local",
+    "docker:stop": "docker rm -f workout-xp-local workout-xp-test",
+    "docker:smoke": "node scripts/docker-smoke-test.mjs",
+    "docker:test": "pnpm docker:build && pnpm docker:smoke"
   }
 }
