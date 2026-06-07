@@ -1,0 +1,125 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://workout-xp.local/schemas/program.schema.json",
+  "title": "WorkoutProgram",
+  "description": "Canonical shape for a structured workout program. Maps to postgres.sql tables.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "programId", "title", "weeks"],
+  "properties": {
+    "schemaVersion": {
+      "type": "integer",
+      "const": 1,
+      "description": "Increment when the program document shape changes."
+    },
+    "programId": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Stable identifier for this program definition."
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "weeks": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/ProgramWeek" }
+    }
+  },
+  "$defs": {
+    "ProgramWeek": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["week", "title", "days"],
+      "properties": {
+        "week": { "type": "integer", "minimum": 1 },
+        "title": { "type": "string", "minLength": 1 },
+        "days": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/WorkoutDay" }
+        }
+      }
+    },
+    "WorkoutDay": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "week", "order", "title", "isRestDay", "exercises"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Stable slug used by client progress storage."
+        },
+        "week": { "type": "integer", "minimum": 1 },
+        "order": { "type": "integer", "minimum": 1 },
+        "title": { "type": "string", "minLength": 1 },
+        "isRestDay": { "type": "boolean" },
+        "exercises": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/Exercise" }
+        }
+      }
+    },
+    "Exercise": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "order",
+        "name",
+        "warmupSets",
+        "workingSets",
+        "reps",
+        "load",
+        "rpe",
+        "rest",
+        "substitutions",
+        "notes",
+        "videoLinks"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Stable slug used by client progress storage."
+        },
+        "order": { "type": "integer", "minimum": 1 },
+        "name": { "type": "string", "minLength": 1 },
+        "warmupSets": { "type": "string" },
+        "workingSets": { "type": "string" },
+        "reps": { "type": "string" },
+        "load": { "type": "string" },
+        "rpe": { "type": "string" },
+        "rest": { "type": "string" },
+        "substitutions": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/Substitution" }
+        },
+        "notes": { "type": "string" },
+        "videoLinks": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/VideoLink" }
+        }
+      }
+    },
+    "Substitution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "videoUrl": { "type": ["string", "null"] }
+      }
+    },
+    "VideoLink": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["label", "url"],
+      "properties": {
+        "label": { "type": "string", "minLength": 1 },
+        "url": { "type": "string", "format": "uri" }
+      }
+    }
+  }
+}

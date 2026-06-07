@@ -1,0 +1,2 @@
+# Optional: only needed to re-import from a local spreadsheet via scripts/import-program.py
+openpyxl>=3.1.5

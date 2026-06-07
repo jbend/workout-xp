@@ -1,0 +1,18 @@
+{
+  "name": "workout-xp",
+  "private": true,
+  "packageManager": "pnpm@11.0.0",
+  "engines": {
+    "node": ">=24",
+    "pnpm": ">=11"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": ["esbuild"]
+  },
+  "scripts": {
+    "dev": "pnpm --filter @workout-xp/web dev",
+    "build": "pnpm --filter @workout-xp/web build",
+    "check": "pnpm --filter @workout-xp/web check",
+    "import:program": "python scripts/import-program.py"
+  }
+}

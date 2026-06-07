@@ -1,0 +1,41 @@
+# dependencies
+node_modules/
+.pnpm-store/
+
+# build
+build/
+.svelte-kit/
+dist/
+.output/
+
+# env
+.env
+.env.*
+!.env.example
+
+# logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# test / coverage
+coverage/
+
+# source spreadsheets (import via scripts/import-program.py)
+*.xlsx
+*.xls
+data/source/
+
+# misc
+*.local
+.vercel
+.netlify

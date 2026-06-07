@@ -1,0 +1,18 @@
+{
+  "name": "Workout XP",
+  "short_name": "Workout XP",
+  "description": "Mobile-first navigator for the Essentials 5x per week workout program.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f1f17",
+  "theme_color": "#0f2f20",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
