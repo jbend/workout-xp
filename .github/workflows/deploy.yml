@@ -53,7 +53,6 @@ jobs:
           cache-to: type=gha,mode=max
 
       - name: Trigger Dokploy deployment
-        if: secrets.DOKPLOY_WEBHOOK_URL != ''
         env:
           DOKPLOY_WEBHOOK_URL: ${{ secrets.DOKPLOY_WEBHOOK_URL }}
         run: |
