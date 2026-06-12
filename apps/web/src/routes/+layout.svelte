@@ -18,8 +18,8 @@
         <Activity size={22} />
       </span>
       <div>
-        <p class="text-sm font-semibold uppercase tracking-[0.18em] text-primary">Essentials</p>
-        <h1 class="text-xl font-bold text-foreground">Workout XP</h1>
+        <p class="text-sm font-semibold uppercase tracking-[0.18em] text-primary">Jeff Nippard</p>
+        <h1 class="text-xl font-bold text-foreground">Essentials</h1>
       </div>
     </a>
   </header>
