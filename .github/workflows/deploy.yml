@@ -53,4 +53,20 @@ jobs:
           cache-to: type=gha,mode=max
 
       - name: Trigger Dokploy deployment
-        run: curl -fsS "${{ secrets.DOKPLOY_WEBHOOK_URL }}"
+        if: secrets.DOKPLOY_WEBHOOK_URL != ''
+        env:
+          DOKPLOY_WEBHOOK_URL: ${{ secrets.DOKPLOY_WEBHOOK_URL }}
+        run: |
+          url=$(printf '%s' "$DOKPLOY_WEBHOOK_URL" | tr -d '\r\n' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
+          if [ -z "$url" ]; then
+            echo "DOKPLOY_WEBHOOK_URL is empty after trimming whitespace."
+            exit 1
+          fi
+          case "$url" in
+            http://*|https://*) ;;
+            *)
+              echo "DOKPLOY_WEBHOOK_URL must start with http:// or https://"
+              exit 1
+              ;;
+          esac
+          curl -fsS "$url"
